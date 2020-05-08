@@ -1,22 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <app-header></app-header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Header from './components/navigation/Header'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    appHeader: Header
+  },
+  created() {
+    this.$store.dispatch('login', {email: 'lein.davir@gmail.com', password: 'lein1234'})
   }
 }
 </script>
 
 <style>
+@import "/normalize-scss/sass/normalize/import-now";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
