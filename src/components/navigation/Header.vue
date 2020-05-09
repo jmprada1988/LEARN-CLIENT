@@ -53,6 +53,7 @@
   display: inline;
   float: right;
   font-size: 18px;
+  background-color: #4d4d4d;
 }
 
 .nav > .nav-links > a {

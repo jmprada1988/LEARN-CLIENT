@@ -1,12 +1,15 @@
 <template>
-  <h1>Home page</h1>
+  <div>
+    <slider />
+  </div>
 </template>
 
 <script>
+import Slider from '../../components/ui/Slider'
 export default {
   name: 'Home',
-  props: {
-    msg: String
+  components: {
+    Slider
   }
 }
 </script>
