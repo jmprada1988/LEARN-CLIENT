@@ -14,19 +14,30 @@
       </label>
     </div>
     
-    <div class="nav-links">
-      <router-link to="/">Inicio</router-link>
-      <router-link to="/login">Ingreso</router-link>
-      <router-link to="/register">Registro</router-link>
-      <router-link to="/dashboard">Dashboard</router-link>
-      <router-link to="/courses">Cursos</router-link>
+    <div v-for="(route, index) in routes" :key="index" class="nav-links">
+      <router-link :to="route">{{getRouteTitle(route)}}</router-link>
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    routes: {
+      type: Array,
+      required: true,
+    },
+    model: String,
+    
+  },
+  methods: {
+    getRouteTitle: route => { 
+      return typeof route.title === 'function' ? route.title() : route.title
+      },
+  }
+
+}
+</script>
 <style scoped>
-
-
-
 .nav {
   height: 50px;
   width: 100%;

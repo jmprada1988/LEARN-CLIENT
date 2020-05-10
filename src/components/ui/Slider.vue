@@ -3,7 +3,7 @@
     <transition-group name='fade' tag='div'>
       <div v-for="i in [currentIndex]" :key='i'>
         <img :src="currentImg" />
-        <quote class="centered-quote">{{currentText}}</quote>
+        <q class="centered-quote">{{currentText}}</q>
       </div>
     </transition-group>
     <a class="prev" @click="prev" href='#'>&#10094;</a>
@@ -65,6 +65,7 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&display=swap');
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.9s ease;
@@ -110,6 +111,8 @@ width:100%
   background-color: rgba(0,0,0,0.9);
 }
 .centered-quote {
+  font-family: 'Dancing Script', cursive;
+  font-size: 700;
   position: absolute;
   top: 50%;
   left: 50%;

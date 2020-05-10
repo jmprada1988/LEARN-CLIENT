@@ -1,3 +1,4 @@
+import { lazyLoadView } from "../utils/index";
 export const routes = [
   {
     path: '/',
@@ -7,32 +8,48 @@ export const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => lazyLoadView(import('./views/auth/Login.vue'))
+    component: () => lazyLoadView(import('./views/auth/Login.vue')),
+    meta: {
+      guest: true
+    }
+  }, 
+  {
+    path: '/register',
+    name: 'register',
+    component: () => lazyLoadView(import('./views/auth/Register.vue')),
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: () => lazyLoadView(import('./views/auth/Logout.vue'))
+  },
+  {
+    path: '/dashboard',
+    name: 'userboard',
+    component: () => lazyLoadView(import('./views/dashboard/Main.vue')),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => lazyLoadView(import('./views/admin/Main.vue')),
+    meta: {
+      requiresAuth: true,
+      isAdmin: true
+    }
+  },
+  {
+    path: '/courses',
+    name: 'courses',
+  },
+  {
+    path: '/programs',
+    name: 'programs'
   }
 ]
 
-function lazyLoadView(AsyncView) {
-  const AsyncHandler = () => ({
-    component: AsyncView,
-    // A component to use while the component is loading.
-    loading: require('./views/_loading.vue').default,
-    // Delay before showing the loading component.
-    // Default: 200 (milliseconds).
-    delay: 400,
-    // A fallback component in case the timeout is exceeded
-    // when loading the component.
-    error: require('./views/_timeout.vue').default,
-    // Time before giving up trying to load the component.
-    // Default: Infinity (milliseconds).
-    timeout: 10000,
-  })
-
-  return Promise.resolve({
-    functional: true,
-    render(h, { data, children }) {
-      // Transparently pass any props or children
-      // to the view component.
-      return h(AsyncHandler, data, children)
-    },
-  })
-}
