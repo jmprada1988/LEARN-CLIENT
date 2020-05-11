@@ -7,13 +7,12 @@ export const reset = ({commit}) =>{
 
 export const login = async ({commit}, user) => {
   const {email, password} = user
-  console.log('user:', email, password)
   try {
     const response = await logUser(email, password)
     const token = response.data.token
     const user = response.data.user
     localStorage.setItem('token', token)
-    commit('auth_success', token, user)
+    commit('auth_success', {token, user})
   } catch (error) {
     commit('auth_error')
     localStorage.removeItem('token')
