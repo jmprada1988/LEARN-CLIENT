@@ -15,7 +15,7 @@
     </div>
     
     <div v-for="(route, index) in routes" :key="index" class="nav-links">
-      <router-link :to="route">{{getRouteTitle(route)}}</router-link>
+      <router-link :to="route">{{route.title}}</router-link>
     </div>
   </div>
 </template>

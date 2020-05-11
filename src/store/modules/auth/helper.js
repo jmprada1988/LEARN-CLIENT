@@ -2,5 +2,7 @@ export const initiaState = () => ({
   status: '',
   token: localStorage.getItem('token') || '',
   user : {},
-  counter: 0
+  isLoggedIn: false,
+  isLoggedOut: true,
+  authStatus: ''
 })

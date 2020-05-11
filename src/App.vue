@@ -1,14 +1,13 @@
 <template>
   <div id="app">
     <app-header v-if="isLoggedIn" :routes="loggedInNavRoutes"></app-header>
-    <app-header v-if="isLoggedOut" :routes="getWelcomeNavRoutes"></app-header>
+    <app-header v-if="isLoggedOut" :routes="loggedOutNavRoutes"></app-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import appHeader from './components/navigation/Header'
-import {mapGetters, mapActions} from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -33,11 +32,23 @@ export default {
       loggedInNavRoutes: [
         {
           name: 'userboard',
-          title: () => 'Ingreso como ' + this.currenUser.name
+          title: 'User Dashboard'
         },
         {
           name: 'logout',
           title: 'Salir'
+        },
+        {
+          name: 'home',
+          title: 'Home'  
+        },
+        {
+          name: 'courses',
+          title: 'Cursos'
+        },
+        {
+          name: 'programs',
+          title: 'Programas'
         }
       ],
       loggedOutNavRoutes: [
@@ -48,22 +59,29 @@ export default {
         {
           name: 'register',
           title: 'Registrarme'
+        },
+        {
+          name: 'home',
+          title: 'Home'  
+        },
+        {
+          name: 'courses',
+          title: 'Cursos'
+        },
+        {
+          name: 'programs',
+          title: 'Programas'
         }
       ]
     }
   },
-  
   computed: {
-    ...mapGetters('auth',['isLoggedIn', 'isLoggedOut']),
-    getWelcomeNavRoutes: function() {
-      return [...this.persistentsNavRoutes, ...this.loggedOutNavRoutes]
+    isLoggedIn() {
+      return localStorage.getItem('token')
     },
-    getLoggedInNavRoutes: function() {
-      return [...this.persistentsNavRoutes, this.loggedInNavRoutes]
+    isLoggedOut() {
+      return !localStorage.getItem('token')
     }
-  },
-  methods: {
-    ...mapActions('auth', ['login', 'logout', 'register'])
   }
 }
 </script>

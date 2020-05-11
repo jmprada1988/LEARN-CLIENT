@@ -1,7 +1,7 @@
 
   export const authStatus = state => state.status
-  export const isLoggedOut = state => !state.token
-  export const isLoggedIn = state => !!state.token
-  export const logout = state => !state.token
+  export const isLoggedOut = state => state.isLoggedOut
+  export const isLoggedIn = state => state.isLoggedIn
+  export const logout = state => state.isLoggedOut
 
 
