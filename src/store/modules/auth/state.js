@@ -1,8 +1,4 @@
 export const state = {
-  status: '',
-  token: localStorage.getItem('token') || '',
-  user : {},
-  isLoggedIn: false,
-  isLoggedOut: true,
-  authStatus: ''
+  token: window.localStorage.getItem('authToken'),
+  current_user: null
 }

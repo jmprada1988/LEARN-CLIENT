@@ -1,7 +1,5 @@
-
-  export const authStatus = state => state.status
-  export const isLoggedOut = state => state.isLoggedOut
-  export const isLoggedIn = state => state.isLoggedIn
-  export const logout = state => state.isLoggedOut
-
+export const getters = {
+  isLoggedIn: state => !!state.token,
+  getCurrentUser: state => state.current_user ? state.current_user : {}
+}
 
