@@ -18,7 +18,7 @@ export const actions = {
     router.push('/')
   },
   logout: ({ commit }) => {
-    commit('setToken', null)
+    commit('setAuthToken', null)
     commit('setCurrentUser', null)
     window.localStorage.removeItem('authToken')
     router.push('/')

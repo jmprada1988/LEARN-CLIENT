@@ -15,7 +15,7 @@
     </div>
     <div v-if="isLoggedIn" class="nav-links">
       <router-link v-for="route in getLoggeInRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
-      <i/>
+      <button @click="handleLogout">Salir</button>
     </div>
     <div v-else class="nav-links">
       <router-link v-for="route in getWelcomeRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { persistentsNavRoutes, loggedInNavRoutes, loggedOutNavRoutes } from '../../router/routes'
 
 
@@ -40,6 +40,15 @@ export default {
     }),
     getWelcomeRoutes: () => [...persistentsNavRoutes, ...loggedOutNavRoutes],
     getLoggeInRoutes: () => [...persistentsNavRoutes, ...loggedInNavRoutes],
+  },
+  methods: {
+    ...mapActions({
+      logout: 'logout'
+    }),
+    handleLogout(e) {
+      e.preventDefault()
+      this.logout()
+    }
   }
   
 }
