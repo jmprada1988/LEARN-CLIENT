@@ -3,7 +3,7 @@
     <input type="checkbox" id="nav-check">
     <div class="nav-header">
       <div class="nav-title">
-        Centro De Aprendizaje
+       <a href="/"> Centro De Aprendizaje</a>
       </div>
     </div>
     <div class="nav-btn">
@@ -15,6 +15,7 @@
     </div>
     <div v-if="isLoggedIn" class="nav-links">
       <router-link v-for="route in getLoggeInRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
+      <i/>
     </div>
     <div v-else class="nav-links">
       <router-link v-for="route in getWelcomeRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>

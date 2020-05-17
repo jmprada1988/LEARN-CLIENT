@@ -38,15 +38,6 @@ export const   loggedOutNavRoutes = [
 
 export const loggedInNavRoutes = [
     {
-      path: '/logout',
-      name: 'Salir',
-      component: () => lazyLoadView(import('./views/auth/Logout.vue')),
-      meta: {
-        isLoggedIn: true,
-        requiresAuth: true
-      }
-    },
-    {
       path: '/dashboard',
       name: 'userboard',
       component: () => lazyLoadView(import('./views/dashboard/Dashboard.vue')),

@@ -6,7 +6,7 @@ const httpClient = axios.create({
       "Content-Type": "application/json",
   }
 });
-const getAuthToken = () => localStorage.getItem('token');
+const getAuthToken = () => window.localStorage.getItem('authToken');
 
 const authInterceptor = (config) => {
     config.headers['Authorization'] = getAuthToken();
