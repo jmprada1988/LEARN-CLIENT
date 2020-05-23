@@ -15,7 +15,7 @@ export const actions = {
     window.localStorage.setItem('authToken', data.token)
     commit('setAuthToken', data.token)
     commit('setCurrentUser', data.user)
-    router.push('/')
+    router.push('courses')
   },
   logout: ({ commit }) => {
     commit('setAuthToken', null)

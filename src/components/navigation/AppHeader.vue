@@ -1,26 +1,59 @@
 <template>
-    <div class="nav">
-    <input type="checkbox" id="nav-check">
-    <div class="nav-header">
-      <div class="nav-title">
-       <a href="/"> Centro De Aprendizaje</a>
-      </div>
-    </div>
-    <div class="nav-btn">
-      <label for="nav-check">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
-    <div v-if="isLoggedIn" class="nav-links">
-      <router-link v-for="route in getLoggeInRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
-      <button @click="handleLogout">Salir</button>
-    </div>
-    <div v-else class="nav-links">
-      <router-link v-for="route in getWelcomeRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
-    </div>
-  </div>
+  <v-row no-gutters>
+    <v-col
+      v-for="(bar, i) in bars"
+      :key="i"
+      cols="12"
+      sm="12"
+      lg="12"
+      class="my-4"
+    >
+      <v-card color="grey lighten-4" flat height="0px">
+        <v-toolbar :color="bar.class" :dark="bar.dark">
+          <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-toolbar-title>
+            <span>Latam</span>
+            <span class="white-dark">Learning</span>
+            <span>Center</span>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon>
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon color="red">mdi-heart</v-icon>
+          </v-btn>
+          <v-btn icon v-if="isLoggedIn" @click="handleLogout">
+            <span>Out</span>
+            <v-icon color="red">mdi-logout</v-icon>
+          </v-btn>
+          <router-link to="/login" v-if="!isLoggedIn">
+            <span>Ingresar</span>
+            <v-icon  color="green">mdi-login</v-icon>
+          </router-link>
+        </v-toolbar>
+        <v-navigation-drawer 
+        v-model="drawer" 
+        class="light-blue lighten-5"
+        app
+        >
+        <div class="nav-container">
+          <v-btn icon class="close-drawer"  @click="drawer = !drawer">
+              <v-icon>mdi-arrow-left</v-icon>
+              <v-spacer></v-spacer>
+          </v-btn> 
+          <div v-if="isLoggedIn" class="nav-links">
+            <router-link v-for="route in getLoggeInRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
+            <button @click="handleLogout">Salir</button>
+          </div>
+          <div v-else class="nav-links">
+            <router-link v-for="route in getWelcomeRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
+          </div>
+        </div>
+        </v-navigation-drawer>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -31,7 +64,12 @@ export default {
   name: 'AppHeader',
   data() {
     return {
-      routes: []
+      routes: [],
+      isModalVisible: false,
+       bars: [
+        { class: '' },
+      ],
+      drawer: null
     }
   },
   computed: {
@@ -55,93 +93,25 @@ export default {
 </script>
 
 <style scoped>
-.nav {
-  height: 50px;
-  width: 100%;
-  background-color: #4d4d4d;
-  position: relative;
+span {
+  color: darkgray;
 }
-
-.nav > .nav-header {
-  display: inline;
+.white-dark {
+  color: grey;
 }
-
-.nav > .nav-header > .nav-title {
-  display: inline-block;
-  font-size: 22px;
-  color: #fff;
-  padding: 10px 10px 10px 10px;
-}
-
-.nav > .nav-btn {
-  display: none;
-}
-
-.nav > .nav-links {
-  display: inline;
-  float: right;
-  font-size: 18px;
-  background-color: #4d4d4d;
-}
-
-.nav > .nav-links > a {
-  display: inline-block;
-  padding: 13px 10px 13px 10px;
+.nav-links {
+  display: block;
+  color: 'white';
   text-decoration: none;
-  color: #efefef;
 }
-
-.nav > .nav-links > a:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-
-.nav > #nav-check {
-  display: none;
-}
-
-@media (max-width:600px) {
-  .nav > .nav-btn {
-    display: inline-block;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-  }
-  .nav > .nav-btn > label {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    padding: 13px;
-  }
-  .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  .nav > .nav-btn > label > span {
-    display: block;
-    width: 25px;
-    height: 10px;
-    border-top: 2px solid #eee;
-  }
-  .nav > .nav-links {
-    position: absolute;
-    display: block;
-    width: 100%;
-    background-color: #333;
-    height: 0px;
-    transition: all 0.3s ease-in;
-    overflow-y: hidden;
-    top: 50px;
-    left: 0px;
-  }
-  .nav > .nav-links > a {
-    display: block;
-    width: 100%;
-  }
-  .nav > #nav-check:not(:checked) ~ .nav-links {
-    height: 0px;
-  }
-  .nav > #nav-check:checked ~ .nav-links {
-    height: calc(100vh - 50px);
-    overflow-y: auto;
-  }
+.close-drawer {
+  align-self: flex-end;
 }
 </style>

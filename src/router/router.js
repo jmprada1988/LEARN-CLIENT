@@ -30,10 +30,9 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else if (to.matched.some((record) => record.meta.guest)) {
-    if (localStorage.getItem("authToken") == null) {
+    if (localStorage.getItem("authToken") !== null) {
       next({
-        path: '/',
-        params: { nextUrl: to.fullPath }
+        path: '/dashboard'
       });
     } else {
       next({ path: '/' });

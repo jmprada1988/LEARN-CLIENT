@@ -1,8 +1,10 @@
 <template>
-  <div id="app">
+  <v-app class="grey lighten-4">
     <AppHeader></AppHeader>
-    <router-view></router-view>
-  </div>
+    <v-content>
+      <router-view></router-view>
+    </v-content>  
+  </v-app>
 </template>
 
 <script>
