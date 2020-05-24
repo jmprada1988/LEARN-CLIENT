@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card v-if="getSnackStatus">
     <v-snackbar
       v-model="getSnackStatus"
       :color="color"
