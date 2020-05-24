@@ -24,7 +24,9 @@
     </v-card-text>
     <v-spacer></v-spacer>
     <v-card-actions>
-      <v-btn class="success">Registrarme</v-btn>
+      <router-link to="/register">
+        <v-btn class="success">Registrarme</v-btn>
+      </router-link>
       <v-spacer></v-spacer>
       <v-btn class="info" @click="handleSubmit">Ingresar</v-btn>
     </v-card-actions>

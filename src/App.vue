@@ -12,7 +12,7 @@ import AppHeader from './components/navigation/AppHeader'
 export default {
   name: 'App',
   components: {
-    AppHeader: AppHeader
+    AppHeader: AppHeader,
   },
 }
 </script>

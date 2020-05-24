@@ -8,9 +8,10 @@
       lg="12"
       class="my-4"
     >
+      <Snackbar />
       <v-card color="grey lighten-4" flat height="0px">
-        <v-toolbar :color="bar.class" :dark="bar.dark">
-          <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar :color="bar.class" :dark="bar.dark">
+          <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
           <v-toolbar-title>
             <span>Latam</span>
             <span class="white-dark">Learning</span>
@@ -31,7 +32,7 @@
             <span>Ingresar</span>
             <v-icon  color="green">mdi-login</v-icon>
           </router-link>
-        </v-toolbar>
+        </v-app-bar>
         <v-navigation-drawer 
         v-model="drawer" 
         class="light-blue lighten-5"
@@ -58,10 +59,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { persistentsNavRoutes, loggedInNavRoutes, loggedOutNavRoutes } from '../../router/routes'
-
+import Snackbar from '../ui/Snackbar'
 
 export default {
   name: 'AppHeader',
+  components: {
+    Snackbar
+  },
   data() {
     return {
       routes: [],

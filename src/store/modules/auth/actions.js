@@ -4,10 +4,11 @@ import { router } from '../../../router/router'
 
 export const actions = {
   register: async ({ commit }, user) => {
-    const response = await api.registerUser(user)
-    window.localStorage.setItem('authToken', response.token)
-    commit('setAuthToken', response.token)
-    commit('setCurrentUser', response.user)
+    console.log('REquest:', user)
+    const {data} = await api.registerUser(user)
+    console.log('REsponse data: ', data)
+    commit('setRegistrationMessage', data.message)
+    commit('setSnackVisible')
     router.push('/')
   },
   login: async ({ commit }, user) => {
