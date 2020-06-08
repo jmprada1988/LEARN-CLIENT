@@ -8,7 +8,7 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-text class="white--text text-center">
-        &copy;2020 - <strong>Latam Learning Center</strong>
+        &copy;{{year}} - <strong>Latam Learning Center</strong>
       </v-card-text>
     </v-card>
   </v-footer>
@@ -24,8 +24,9 @@ export default {
         'mdi-google-plus',
         'mdi-linkedin',
         'mdi-github'
-      ]
+      ],
+      year: new Date().getUTCFullYear()
     }
-  }
+  },
 }
 </script>
