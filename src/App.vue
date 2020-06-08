@@ -3,16 +3,19 @@
     <AppHeader></AppHeader>
     <v-content>
       <router-view></router-view>
-    </v-content>  
+    </v-content> 
+    <AppFooter></AppFooter>
   </v-app>
 </template>
 
 <script>
 import AppHeader from './components/navigation/AppHeader'
+import AppFooter from './components/navigation/AppFooter'
 export default {
   name: 'App',
   components: {
-    AppHeader: AppHeader,
+    AppHeader,
+    AppFooter
   },
 }
 </script>

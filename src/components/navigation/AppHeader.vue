@@ -35,7 +35,7 @@
         </v-app-bar>
         <v-navigation-drawer 
         v-model="drawer" 
-        class="light-blue lighten-5"
+        class="purple lighten-1 white--text text-xs-center flex"
         app
         >
         <div class="nav-container">
@@ -45,7 +45,6 @@
           </v-btn> 
           <div v-if="isLoggedIn" class="nav-links">
             <router-link v-for="route in getLoggeInRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
-            <button @click="handleLogout">Salir</button>
           </div>
           <div v-else class="nav-links">
             <router-link v-for="route in getWelcomeRoutes"  class="nav-links" :to="route.path" :key="route.name">{{route.name}}</router-link>
@@ -103,10 +102,25 @@ span {
 .white-dark {
   color: grey;
 }
+
 .nav-links {
-  display: block;
-  color: 'white';
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  align-items: flex-start;
+  font: white 16px solid;
   text-decoration: none;
+  color: #FFFFFF;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+.nav-links a {
+  border: 1px solid transparent;
+}
+.nav-links a:hover {
+  background: #eee;
+  color: #AB47BC
 }
 .nav-container {
   display: flex;
