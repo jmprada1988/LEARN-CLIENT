@@ -1,75 +1,26 @@
 <template>
-  <div id="app">
-    <app-header v-if="isLoggedIn" :routes="loggedInNavRoutes"></app-header>
-    <app-header v-if="isLoggedOut" :routes="getWelcomeNavRoutes"></app-header>
-    <router-view></router-view>
-  </div>
+  <v-app class="grey lighten-4">
+    <AppHeader></AppHeader>
+    <v-content>
+      <router-view></router-view>
+    </v-content> 
+    <AppFooter></AppFooter>
+  </v-app>
 </template>
 
 <script>
-import appHeader from './components/navigation/Header'
-import {mapGetters, mapActions} from 'vuex'
+import AppHeader from './components/navigation/AppHeader'
+import AppFooter from './components/navigation/AppFooter'
 export default {
   name: 'App',
   components: {
-    appHeader: appHeader
+    AppHeader,
+    AppFooter
   },
-  data() {
-    return {
-      persistentsNavRoutes: [
-        {
-          name: 'home',
-          title: 'Home'  
-        },
-        {
-          name: 'courses',
-          title: 'Cursos'
-        },
-        {
-          name: 'programs',
-          title: 'Programas'
-        }
-      ],
-      loggedInNavRoutes: [
-        {
-          name: 'userboard',
-          title: () => 'Ingreso como ' + this.currenUser.name
-        },
-        {
-          name: 'logout',
-          title: 'Salir'
-        }
-      ],
-      loggedOutNavRoutes: [
-        {
-          name: 'login',
-          title: 'Ingresar'
-        },
-        {
-          name: 'register',
-          title: 'Registrarme'
-        }
-      ]
-    }
-  },
-  
-  computed: {
-    ...mapGetters('auth',['isLoggedIn', 'isLoggedOut']),
-    getWelcomeNavRoutes: function() {
-      return [...this.persistentsNavRoutes, ...this.loggedOutNavRoutes]
-    },
-    getLoggedInNavRoutes: function() {
-      return [...this.persistentsNavRoutes, this.loggedInNavRoutes]
-    }
-  },
-  methods: {
-    ...mapActions('auth', ['login', 'logout', 'register'])
-  }
 }
 </script>
 
 <style>
-@import "/normalize-scss/sass/normalize/import-now";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

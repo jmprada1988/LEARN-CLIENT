@@ -1,55 +1,59 @@
-import { lazyLoadView } from "../utils/index";
-export const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: () => lazyLoadView(import('./views/Home.vue'))
-  }, 
-  {
-    path: '/login',
-    name: 'login',
-    component: () => lazyLoadView(import('./views/auth/Login.vue')),
-    meta: {
-      guest: true
+import { lazyLoadView } from "../utils/index"
+
+export const   persistentsNavRoutes = [
+    {
+      path: '/',
+      component: () => lazyLoadView(import('../router/views/Home.vue'))
+    }, 
+    {
+      path: '/courses',
+      name: 'Cursos',
+      component: () => lazyLoadView(import('./views/courses/AllCourses.vue'))
+    },
+    {
+      path: '/programs',
+      name: 'Programas',
+      component: () => lazyLoadView(import('./views/programs/AllPrograms.vue'))
+    },
+    {
+      path: '*',
+      name: '',
+      component: () => lazyLoadView(import('./views/_404.vue'))
     }
-  }, 
-  {
-    path: '/register',
-    name: 'register',
-    component: () => lazyLoadView(import('./views/auth/Register.vue')),
-    meta: {
-      guest: true
+
+  ];
+
+export const   loggedOutNavRoutes = [
+    {
+      path: '/login',
+      name: 'Ingresar',
+      component: () => lazyLoadView(import('./views/auth/Login.vue')),
+    },
+    {
+      path: '/register',
+      name: 'Registrarse',
+      component: () => lazyLoadView(import('./views/auth/Register.vue')),
     }
-  },
-  {
-    path: '/logout',
-    name: 'logout',
-    component: () => lazyLoadView(import('./views/auth/Logout.vue'))
-  },
-  {
-    path: '/dashboard',
-    name: 'userboard',
-    component: () => lazyLoadView(import('./views/dashboard/Main.vue')),
-    meta: {
-      requiresAuth: true
+  ];
+
+export const loggedInNavRoutes = [
+    {
+      path: '/dashboard',
+      name: 'userboard',
+      component: () => lazyLoadView(import('./views/dashboard/Dashboard.vue')),
+      meta: {
+        requiresAuth: true,
+        current_user: true
+      }
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => lazyLoadView(import('./views/admin/Main.vue')),
+      meta: {
+        requiresAuth: true,
+        is_admin: true
+      }
     }
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    component: () => lazyLoadView(import('./views/admin/Main.vue')),
-    meta: {
-      requiresAuth: true,
-      isAdmin: true
-    }
-  },
-  {
-    path: '/courses',
-    name: 'courses',
-  },
-  {
-    path: '/programs',
-    name: 'programs'
-  }
-]
+  ];
 
