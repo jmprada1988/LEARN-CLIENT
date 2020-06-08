@@ -22,17 +22,27 @@ router.beforeEach((to, from, next) => {
         params: { nextUrl: to.fullPath },
       })
     } else {
-      let user = JSON.parse(localStorage.getItem("user"));
+      let user = JSON.parse(localStorage.getItem("currentUser"));
       if (to.matched.some((record) => record.meta.is_admin)) {
-        if (user.is_admin == 1) {
+        if (user.role === 'admin') {
           next();
-        } 
+        } else {
+          next({path: '/dashboard'})
+        }
+      } else if(to.matched.some(record => record.meta.current_user)) {
+        if(user.userId) {
+          next();
+        } else {
+          next({
+            path: '/'
+          })
+        }
       }
     }
   } else if (to.matched.some((record) => record.meta.guest)) {
     if (localStorage.getItem("authToken") !== null) {
       next({
-        path: '/dashboard'
+        path: '/courses'
       });
     } else {
       next({ path: '/' });

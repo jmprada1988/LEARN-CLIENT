@@ -43,6 +43,7 @@ export const loggedInNavRoutes = [
       component: () => lazyLoadView(import('./views/dashboard/Dashboard.vue')),
       meta: {
         requiresAuth: true,
+        current_user: true
       }
     },
     {
@@ -51,7 +52,7 @@ export const loggedInNavRoutes = [
       component: () => lazyLoadView(import('./views/admin/Main.vue')),
       meta: {
         requiresAuth: true,
-        isAdmin: true
+        is_admin: true
       }
     }
   ];

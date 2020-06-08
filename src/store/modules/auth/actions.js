@@ -14,6 +14,7 @@ export const actions = {
   login: async ({ commit }, user) => {
     const { data } = await api.logUser(user)
     window.localStorage.setItem('authToken', data.token)
+    window.localStorage.setItem('currentUser', JSON.stringify(data.user))
     commit('setAuthToken', data.token)
     commit('setCurrentUser', data.user)
     router.push('courses')
@@ -22,6 +23,7 @@ export const actions = {
     commit('setAuthToken', null)
     commit('setCurrentUser', null)
     window.localStorage.removeItem('authToken')
+    window.localStorage.removeItem('currentUser')
     router.push('/')
   }
 }
