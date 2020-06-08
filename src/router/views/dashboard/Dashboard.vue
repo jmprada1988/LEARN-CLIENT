@@ -1,8 +1,8 @@
 <template>
-  <h2>Admin panel</h2>
+  <h2>User Dashboard</h2>
 </template>
 <script>
 export default {
-  name: 'mainAdmin'
+  name: 'Dashboard'
 }
 </script>

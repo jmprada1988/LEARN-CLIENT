@@ -1,7 +1,8 @@
 
-  export const authStatus = state => state.status
-  export const isLoggedOut = state => !state.token
-  export const isLoggedIn = state => !!state.token
-  export const logout = state => !state.token
-
+export const getters = {
+  isLoggedIn: state => !!state.token,
+  getCurrentUser: state => state.current_user ? state.current_user : {},
+  getSanckMessage: state => state.registration_message.length ?  state.registration_message : '',
+  getSnackStatus: state => !!state.showSnack
+}
 

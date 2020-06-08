@@ -1,8 +1,8 @@
 <template>
-  <h2>Admin panel</h2>
+  <div>List of all courses</div>
 </template>
 <script>
 export default {
-  name: 'mainAdmin'
+  name: 'AllCourses'
 }
 </script>
