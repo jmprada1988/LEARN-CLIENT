@@ -1,42 +1,55 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import { routes } from "./routes";
+import { persistentsNavRoutes, loggedInNavRoutes, loggedOutNavRoutes } from "./routes";
+// import { store } from '../store/index'
 
 Vue.use(VueRouter);
 
-const router = new VueRouter({
+export const router = new VueRouter({
   mode: "history",
-  routes,
+  routes: [
+    ...persistentsNavRoutes,
+    ...loggedInNavRoutes,
+    ...loggedOutNavRoutes
+  ]
 });
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (localStorage.getItem("token") == null) {
+    if (window.localStorage.getItem("authToken") === null) {
       next({
         path: "/login",
         params: { nextUrl: to.fullPath },
-      });
+      })
     } else {
-      let user = JSON.parse(localStorage.getItem("user"));
+      let user = JSON.parse(localStorage.getItem("currentUser"));
       if (to.matched.some((record) => record.meta.is_admin)) {
-        if (user.is_admin == 1) {
+        if (user.role === 'admin') {
           next();
         } else {
-          next({ name: "userboard" });
+          next({path: '/dashboard'})
         }
-      } else {
-        next();
+      } else if(to.matched.some(record => record.meta.current_user)) {
+        if(user.userId) {
+          next();
+        } else {
+          next({
+            path: '/'
+          })
+        }
       }
     }
   } else if (to.matched.some((record) => record.meta.guest)) {
-    if (localStorage.getItem("token") == null) {
-      next();
+    if (localStorage.getItem("authToken") !== null) {
+      next({
+        path: '/courses'
+      });
     } else {
-      next({ name: "userboard" });
+      next({ path: '/' });
     }
   } else {
     next();
   }
 });
 
-export default router;
+

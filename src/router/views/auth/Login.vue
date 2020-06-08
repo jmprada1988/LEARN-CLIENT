@@ -1,45 +1,32 @@
 <template>
-    <div>
-        <h4>Login</h4>
-        <form>
-            <label for="email" >E-Mail Address</label>
-            <div>
-                <input id="email" type="email" v-model="email" required autofocus>
-            </div>
-            <div>
-                <label for="password" >Password</label>
-                <div>
-                    <input id="password" type="password" v-model="password" required>
-                </div>
-            </div>
-            <div>
-                <button type="submit" @click="handleSubmit">
-                    Login
-                </button>
-            </div>
-        </form>
-    </div>
+  <v-content>
+    <v-container>
+      <LoginForm/>
+    </v-container>
+  </v-content>
 </template>
 <script>
-import {mapActions, mapGetters } from 'vuex'
-
+import { mapActions } from "vuex";
+import LoginForm from '../../../components/auth/LoginForm'
 export default {
-  data () {
-    return {
-      email: '',
-      password: ''
-    }
+  name: "Login",
+  components: {
+    LoginForm
   },
-  computed: {
-    ...mapGetters
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
   },
   methods: {
-    ...mapActions('auth', ['login']),
-    async handleSubmit(e) {
-      e.preventDefault()
-      await this.login({email: this.email, password: this.password})
-      this.$router.push('userboard')
+    ...mapActions({
+      login: "login"
+    }),
+    handleSubmit(e) {
+      e.preventDefault();
+      this.login({ email: this.email, password: this.password });
     }
   }
-}
+};
 </script>

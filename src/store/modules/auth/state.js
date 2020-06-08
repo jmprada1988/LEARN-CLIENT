@@ -1,4 +1,6 @@
-import { initiaState } from './helper'
-const state = initiaState()
-
-export default state;
+export const state = {
+  token: window.localStorage.getItem('authToken'),
+  current_user: null,
+  registration_message: '',
+  showSnack: false
+}

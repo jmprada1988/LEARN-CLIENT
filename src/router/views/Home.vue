@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slider />
+    <slider></slider>
   </div>
 </template>
 

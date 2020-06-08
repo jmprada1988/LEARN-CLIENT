@@ -1,8 +1,8 @@
 <template>
-  <h2>Admin panel</h2>
+  <div>All Programs availabe</div>
 </template>
 <script>
 export default {
-  name: 'mainAdmin'
+  name: 'AllPrgograms'
 }
 </script>
